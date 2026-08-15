@@ -1,0 +1,6 @@
+@CargoMindApi_HostAddress = http://localhost:5046
+
+GET {{CargoMindApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
