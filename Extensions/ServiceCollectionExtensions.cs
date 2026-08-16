@@ -19,6 +19,7 @@ namespace CargoMindApi.Extensions
 			services.AddSingleton<AiService>();
 			services.AddScoped<DocumentIngestionService>();
 			services.AddScoped<DocumentChunker>();
+			services.AddScoped<DocumentChunkerV2>();
 
 			return services;
 		}

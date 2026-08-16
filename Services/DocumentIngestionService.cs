@@ -7,12 +7,14 @@ namespace CargoMindApi.Services
 	public class DocumentIngestionService
 	{
 		private readonly CargoMindDbContext _dbContext;
-		private readonly DocumentChunker _chunker;
+		private readonly DocumentChunker _chunker;			//Phase 1
+		private readonly DocumentChunkerV2 _chunker2;		//Phase 2
 
-		public DocumentIngestionService(CargoMindDbContext dbContext, DocumentChunker chunker)
+		public DocumentIngestionService(CargoMindDbContext dbContext, DocumentChunker chunker, DocumentChunkerV2 chunker2)
 		{
 			_dbContext = dbContext;
 			_chunker = chunker;
+			_chunker2 = chunker2;
 		}
 
 		public async Task<Guid> IngestAsync(
@@ -39,7 +41,9 @@ namespace CargoMindApi.Services
 			//document.Chunks.Add(chunk);
 
 
-			var chunks = _chunker.Chunk(content);
+			//var chunks = _chunker.Chunk(content);		//phase 1 chunking
+
+			var chunks = _chunker2.Chunk(content);		//Phase 2
 
 			foreach (var chunkResult in chunks)
 			{
