@@ -12,6 +12,9 @@ namespace CargoMindApi.Data
 		}
 
 		public DbSet<Shipment> Shipments => Set<Shipment>();
+		public DbSet<Document> Documents => Set<Document>();
+		public DbSet<DocumentChunk> DocumentChunks => Set<DocumentChunk>();
+
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
@@ -30,6 +33,14 @@ namespace CargoMindApi.Data
 
 				entity.Property(x => x.RecordedHeightCm)
 					.HasPrecision(10, 2);
+			});
+
+			modelBuilder.Entity<DocumentChunk>(entity =>
+			{
+				entity.HasOne(x => x.Document)
+					.WithMany(x => x.Chunks)
+					.HasForeignKey(x => x.DocumentId)
+					.OnDelete(DeleteBehavior.Cascade);
 			});
 		}
 	}

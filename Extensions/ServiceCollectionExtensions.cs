@@ -1,5 +1,6 @@
 ﻿using CargoMindApi.Data;
 using CargoMindApi.Services;
+using CargoMindApi.Services.Chunking;
 using Microsoft.EntityFrameworkCore;
 
 namespace CargoMindApi.Extensions
@@ -16,6 +17,8 @@ namespace CargoMindApi.Extensions
 
 
 			services.AddSingleton<AiService>();
+			services.AddScoped<DocumentIngestionService>();
+			services.AddScoped<DocumentChunker>();
 
 			return services;
 		}
